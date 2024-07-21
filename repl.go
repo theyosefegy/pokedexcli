@@ -9,7 +9,7 @@ import (
 	"github.com/theyosefegy/pokedexcli/commands"
 )
 
-func startRepl() {
+func startRepl(cfg *commands.Config) {
 	for {
 		fmt.Print(" > ")
 		
@@ -25,11 +25,12 @@ func startRepl() {
 		// return a "cleaned" slice of the user input.		
 		cleaned := cleanInput(text)
 		
-		command := cleaned[0]
+		
+		// A map that contains all available commands i created.
 		availCommands := commands.GetCommands()
-
-
+		
 		// check if the command does actually exists.
+		command := cleaned[0]
 		cmd, ok := availCommands[command]
 
 		if !ok {
@@ -38,7 +39,7 @@ func startRepl() {
 		}
 
 		// Calling the command function.
-		cmd.Callback()
+		cmd.Callback(cfg)
 	}
 }
 

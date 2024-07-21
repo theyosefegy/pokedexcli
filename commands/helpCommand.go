@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Help() {
+func Help(cfg *Config) {
 	availCommands := GetCommands()
 
 	info := ""

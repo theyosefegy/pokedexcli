@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func Exit() {
+func Exit(cfg *Config) {
 	fmt.Print("Exiting...")
 	os.Exit(0)
 }
