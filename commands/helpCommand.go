@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Help(cfg *Config) {
+func Help(cfg *Config) error {
 	availCommands := GetCommands()
 
 	info := ""
@@ -24,4 +24,5 @@ func Help(cfg *Config) {
 `
 
 	fmt.Printf(helpText, info)
+	return nil
 }
