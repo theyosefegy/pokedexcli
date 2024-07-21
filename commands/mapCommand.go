@@ -1,7 +1,6 @@
 package commands
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -26,7 +25,8 @@ func Mapb(cfg *Config) error {
 	resp, err := cfg.PokeClient.ListLocationArea(cfg.PreLocationAreaURL)
 	
 	if cfg.PreLocationAreaURL == nil {
-		return errors.New("you're on the first page")
+		fmt.Println("you're on the first page")
+		return nil
 	}
 
 	if err != nil {
