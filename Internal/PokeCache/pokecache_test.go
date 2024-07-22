@@ -52,7 +52,7 @@ func TestReap(t *testing.T) {
 	_, ok := cache.Get(key1)
 
 	if ok {
-		t.Error("key '%s' should have been reaped", key1)
+		t.Errorf("key '%s' should have been reaped", key1)
 	}
 
 

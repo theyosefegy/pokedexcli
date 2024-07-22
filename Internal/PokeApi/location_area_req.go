@@ -16,10 +16,9 @@ func (c *Client) ListLocationArea(pageURL *string) (LocationAreasResp, error) {
 	if pageURL != nil {
 		fullURL = *pageURL
 	}
-
 	data, ok := c.cache.Get(fullURL)
+
 	if ok {
-		fmt.Println("cache hit!")
 		locationAreaResp := LocationAreasResp{}
 		err := json.Unmarshal(data, &locationAreaResp)
 		if err != nil {
@@ -28,7 +27,6 @@ func (c *Client) ListLocationArea(pageURL *string) (LocationAreasResp, error) {
 
 		return locationAreaResp, nil
 	}
-	fmt.Println("cache miss!")
 
 	// Creating a new HTTP request
 	req, err := http.NewRequest("GET", fullURL, nil)
@@ -47,11 +45,11 @@ func (c *Client) ListLocationArea(pageURL *string) (LocationAreasResp, error) {
 		return LocationAreasResp{}, fmt.Errorf("connection lost, status code: %d", resp.StatusCode)
 	}
 
-	data, err= io.ReadAll(resp.Body)
+	data, err = io.ReadAll(resp.Body)
 	if err != nil {
 		return LocationAreasResp{}, err
 	}
-	
+
 	locationAreaResp := LocationAreasResp{}
 	err = json.Unmarshal(data, &locationAreaResp)
 	if err != nil {
@@ -59,9 +57,10 @@ func (c *Client) ListLocationArea(pageURL *string) (LocationAreasResp, error) {
 	}
 
 	c.cache.Add(fullURL, data)
-	
+
 	return locationAreaResp, nil
 }
+
 func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) {
 	endpoint := "/location-area/" + locationAreaName
 	fullURL := baseURL + endpoint
@@ -69,7 +68,6 @@ func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) 
 	data, ok := c.cache.Get(fullURL)
 
 	if ok {
-		fmt.Println("cache hit!")
 		var locationArea LocationArea
 		err := json.Unmarshal(data, &locationArea)
 		if err != nil {
@@ -78,7 +76,6 @@ func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) 
 
 		return locationArea, nil
 	}
-	fmt.Println("cache miss!")
 
 	// Creating a new HTTP request
 	req, err := http.NewRequest("GET", fullURL, nil)
@@ -102,7 +99,7 @@ func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) 
 	if err != nil {
 		return LocationArea{}, err
 	}
-	
+
 	var locationArea LocationArea
 	err = json.Unmarshal(data, &locationArea)
 	if err != nil {
@@ -110,6 +107,6 @@ func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) 
 	}
 
 	c.cache.Add(fullURL, data)
-	
+
 	return locationArea, nil
 }

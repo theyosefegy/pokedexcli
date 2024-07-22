@@ -7,13 +7,11 @@ import (
 	commands "github.com/theyosefegy/pokedexcli/commands"
 )
 
-
 func main() {
 
 	cfg := commands.Config{
-		PokeClient: pokeapi.NewClient(time.Hour),
-		NextLocationAreaURL: nil,
-		PreLocationAreaURL: nil,
+		PokeClient:     pokeapi.NewClient(time.Hour),
+		CaughtPokemons: map[string]pokeapi.Pokemon{},
 	}
 
 	startRepl(&cfg)
