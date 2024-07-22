@@ -5,7 +5,7 @@ import (
 )
 
 // This 'Map' command displays the locations of all pokemons like in the pokedex :)
-func Map(cfg *Config) error {
+func Map(cfg *Config, args ...string) error {
 
 	resp, err := cfg.PokeClient.ListLocationArea(cfg.NextLocationAreaURL)
 	if err != nil {
@@ -21,7 +21,7 @@ func Map(cfg *Config) error {
 	return nil
 } 
 
-func Mapb(cfg *Config) error {
+func Mapb(cfg *Config, args ...string) error {
 	resp, err := cfg.PokeClient.ListLocationArea(cfg.PreLocationAreaURL)
 	
 	if cfg.PreLocationAreaURL == nil {

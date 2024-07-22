@@ -62,3 +62,54 @@ func (c *Client) ListLocationArea(pageURL *string) (LocationAreasResp, error) {
 	
 	return locationAreaResp, nil
 }
+func (c *Client) GetLocationArea(locationAreaName string) (LocationArea, error) {
+	endpoint := "/location-area/" + locationAreaName
+	fullURL := baseURL + endpoint
+
+	data, ok := c.cache.Get(fullURL)
+
+	if ok {
+		fmt.Println("cache hit!")
+		var locationArea LocationArea
+		err := json.Unmarshal(data, &locationArea)
+		if err != nil {
+			return LocationArea{}, err
+		}
+
+		return locationArea, nil
+	}
+	fmt.Println("cache miss!")
+
+	// Creating a new HTTP request
+	req, err := http.NewRequest("GET", fullURL, nil)
+	if err != nil {
+		return LocationArea{}, err
+	}
+
+	// The 'Do' method sends a HTTP request and returns HTTP response.
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return LocationArea{}, err
+	}
+	defer resp.Body.Close()
+
+	// Status Code
+	if resp.StatusCode > 399 {
+		return LocationArea{}, fmt.Errorf("connection lost, status code: %d", resp.StatusCode)
+	}
+
+	data, err = io.ReadAll(resp.Body)
+	if err != nil {
+		return LocationArea{}, err
+	}
+	
+	var locationArea LocationArea
+	err = json.Unmarshal(data, &locationArea)
+	if err != nil {
+		return LocationArea{}, err
+	}
+
+	c.cache.Add(fullURL, data)
+	
+	return locationArea, nil
+}

@@ -31,6 +31,12 @@ func startRepl(cfg *commands.Config) {
 		
 		// check if the command does actually exists.
 		command := cleaned[0]
+
+		args := []string{}
+		if len(cleaned) > 1 {
+			args = cleaned[1:]
+		}
+
 		cmd, ok := availCommands[command]
 
 		if !ok {
@@ -39,7 +45,7 @@ func startRepl(cfg *commands.Config) {
 		}
 
 		// Calling the command function.
-		cmd.Callback(cfg)
+		cmd.Callback(cfg, args...)
 	}
 }
 

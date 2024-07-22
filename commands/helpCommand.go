@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Help(cfg *Config) error {
+func Help(cfg *Config, args ...string) error {
 	availCommands := GetCommands()
 
 	info := ""
