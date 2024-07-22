@@ -20,11 +20,11 @@ PokedexCLI is a simple REPL (Read-Eval-Print Loop) application that interacts wi
 ## Usage
 Start the REPL by running the application. You can use the following commands:
 
-**help** or **h**: Displays a list of available commands.
-**map** or **m**: Shows the next available maps.
-**mapb** or **mb**: Shows the previous available maps.
-**explore**: Displays all Pokemons in the current area.
-**catch**: Attempt to catch a Pokemon and add it to your Pokedex.
-**mypokemons** or **myp**: Displays all your caught Pokemons with their IDs.
-**inspect**: View information about a caught Pokemon.
-**exit** or **kill** or **close**: Exit the application.
+- **help** or **h**: Displays a list of available commands.
+- **map** or **m**: Shows the next available maps.
+- **mapb** or **mb**: Shows the previous available maps.
+- **explore**: Displays all Pokemons in the current area.
+- **catch**: Attempt to catch a Pokemon and add it to your Pokedex.
+- **mypokemons** or **myp**: Displays all your caught Pokemons with their IDs.
+- **inspect**: View information about a caught Pokemon.
+- **exit** or **kill** or **close**: Exit the application.
